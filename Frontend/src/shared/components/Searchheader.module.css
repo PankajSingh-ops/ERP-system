@@ -1,0 +1,29 @@
+.search_bar{
+    width: 90%;
+    height: 2.5rem;
+    display: flex;
+    background-color: rgb(55,65,81);
+    border-radius: 12px;
+    
+}
+.search_bar label{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search_bar label img{
+    width: 80%;
+    height: 80%;
+}
+.input_search{
+    width: 90%;
+    height: 100%;
+    background-color: rgb(55,65,81);
+    border: none;
+    outline: none;
+    border-radius: 0px 12px 12px 0px;
+    padding-left: 1rem;
+    color: white;
+}
