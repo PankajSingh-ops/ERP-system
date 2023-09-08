@@ -2,7 +2,7 @@
     width: 90%;
     height: 2.5rem;
     display: flex;
-    background-color: rgb(55,65,81);
+    background-color: rgb(232, 233, 235);
     border-radius: 12px;
     
 }
@@ -20,10 +20,10 @@
 .input_search{
     width: 90%;
     height: 100%;
-    background-color: rgb(55,65,81);
+    background-color: rgb(232, 233, 235);
     border: none;
     outline: none;
     border-radius: 0px 12px 12px 0px;
     padding-left: 1rem;
-    color: white;
+    color: rgb(16, 15, 15);
 }
