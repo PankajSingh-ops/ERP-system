@@ -1,0 +1,21 @@
+.main_table{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+
+}
+table,th,td{
+    
+    height: auto;
+    line-height: 3rem;
+    border: 1px solid black;
+    text-align: center;
+    background-color: rgb(31,41,55);
+    color: white;
+}
+table{
+    width: 62%;
+}

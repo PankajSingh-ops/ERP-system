@@ -9,10 +9,23 @@ const userSchema=new mongoose.Schema({
     type:String,
     required:true,
    } ,
+   Email:{
+      type:String,
+      required:true,
+
+   },
+   Phone:{
+      type:Number,
+      required:true,
+
+   },
    Age:{
     type:Number,
     required:true,
    } ,
+   Role:{
+      type:String,
+   },
 
 })
 module.exports=new mongoose.model("User",userSchema)
