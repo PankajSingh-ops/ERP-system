@@ -34,3 +34,40 @@ exports.getUser=async(req,res,next)=>{
    
     
 }
+exports.postDelete=async(req,res,next)=>{
+    const {id}=req.params
+    // console.log(id);
+    try{
+     const prodel=await User.findByIdAndDelete(id)
+     if(prodel){
+        res.status(200).json({message:"File deleted succesfully"})
+     }
+     else{
+        res.status(401).json({message:"Some problem"})
+     }
+    }catch(err){
+        res.status(500).json({message:err.message})
+    }
+}
+
+exports.postEdit=async(req,res,next)=>{
+    const{id}=req.params;
+    console.log(id);
+    try{
+        const editable=await User.findByIdAndUpdate(id,{
+        Firstname:req.body.Firstname,
+        Lastname:req.body.Lastname,
+        Email:req.body.Email,
+        Phone:req.body.Phone,
+        Age:req.body.Age,
+        Role:req.body.Role,
+
+        })
+        if(editable){
+            res.status(200).json({message:"Edit successful"})
+        }
+
+    }catch(err){
+        res.status(500).json({message:err.message})
+    }
+}

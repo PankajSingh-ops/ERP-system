@@ -9,10 +9,11 @@ export default function App() {
   return (
    <BrowserRouter>
    <Routes>
-    <Route path='/' element={<Home/>} />
+   <Route path='/' element={<Home/>} />
    < Route path='/admin/add-user' element={<Adduser/>} />
    < Route path='/admin/teams' element={<Teams/>} />
    <Route path='/profile' element={<Profile/>} />
+
 
    </Routes>
    
