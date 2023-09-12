@@ -1,14 +1,16 @@
+import { useNavigate } from 'react-router-dom'
 import styles from './HeaderDrop.module.css'
 
 export default function HeaderDrop() {
+  const navigate=useNavigate();
   return (
     <div className={styles.dropdown_main}>
       <h3><u>Main</u> </h3>
-      <p>Dashboard</p>
+      <p onClick={()=>navigate("/")}>Dashboard</p>
       <p>Profile</p>
       <h3><u>Admin Section</u></h3>
-      <p>Add User</p>
-      <p>All Users</p>
+      <p onClick={()=>navigate("/admin/add-user")}>Add User</p>
+      <p onClick={()=>navigate("/admin/teams")}>All Users</p>
       <h3><u>Manager Section</u></h3>
       <p>Add Employee</p>
       <p>All Employees</p>

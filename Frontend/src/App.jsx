@@ -4,6 +4,7 @@ import {Route,Routes,BrowserRouter} from 'react-router-dom'
 import Home from './user/Home'
 import Teams from './admin/pages/Teams'
 import Profile from './user/Profile'
+import Edituser from './admin/pages/Edituser'
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
    <Route path='/' element={<Home/>} />
    < Route path='/admin/add-user' element={<Adduser/>} />
    < Route path='/admin/teams' element={<Teams/>} />
+   < Route path='/admin/update/:id' element={<Edituser/>} />
    <Route path='/profile' element={<Profile/>} />
 
 
