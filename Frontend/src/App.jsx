@@ -1,4 +1,4 @@
-import React from 'react'
+import  { useContext, useMemo, useState } from 'react'
 import Adduser from './admin/pages/Adduser'
 import {Route,Routes,BrowserRouter} from 'react-router-dom'
 import Home from './user/Home'
@@ -7,9 +7,25 @@ import Profile from './user/Profile'
 import Edituser from './admin/pages/Edituser'
 import Signin from './auth/pages/Signin'
 import Signup from './auth/pages/Signup'
+import Authcontext from './context/Context'
 
 export default function App() {
+  const [isLoggedIn ,setIsLoggesIn]=useState(false)
+  const loginHandler=(token)=>{
+  localStorage.setItem("token",token)
+  setIsLoggesIn(true)
+  }
+  const logoutHandler=()=>{
+    localStorage.removeItem("token");
+    setIsLoggesIn(false)
+  }
+  const token=useMemo(()=>{
+  return localStorage.getItem("token")
+  },[])
+
   return (
+    <Authcontext.Provider value={{token,isLoggedIn,
+    loginHandler,logoutHandler}}>
    <BrowserRouter>
    <Routes>
    <Route path='/' element={<Home/>} />
@@ -28,6 +44,7 @@ export default function App() {
    </Routes>
    
    </BrowserRouter>
+   </Authcontext.Provider>
    
 
   )

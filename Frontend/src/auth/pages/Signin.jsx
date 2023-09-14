@@ -1,11 +1,13 @@
-import React, { useRef } from 'react'
+import { useContext, useRef } from 'react'
 import Header from '../../shared/components/Header'
 import { useNavigate } from 'react-router-dom';
+import Authcontext from '../../context/Context';
 
 export default function Signin() {
   const useEmail=useRef();
   const usePassword=useRef();
   const navigate=useNavigate();
+  const ctx=useContext(Authcontext)
   const loginSubmit=async(event)=>{
     event.preventDefault();
     const data={
@@ -24,7 +26,8 @@ export default function Signin() {
     // console.log(response);
     if(response){
     const incoming= await response.json()
-    console.log(incoming);
+    let token=incoming.token;
+    ctx.loginHandler(token)
     navigate("/")
 
     }else{

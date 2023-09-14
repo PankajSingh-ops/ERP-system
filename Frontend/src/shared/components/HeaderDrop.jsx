@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './HeaderDrop.module.css'
+import { useContext } from 'react';
+import Authcontext from '../../context/Context';
 
 export default function HeaderDrop() {
   const navigate=useNavigate();
+  const ctx=useContext(Authcontext)
   return (
     <div className={styles.dropdown_main}>
       <h3><u>Main</u> </h3>
@@ -21,6 +24,9 @@ export default function HeaderDrop() {
       <p>Calender</p>
       <p>Leaves</p>
       <p>Activities</p>
+      {ctx.isLoggedIn&&(
+      <p onClick={ctx.logoutHandler}>Logout</p>)
+      }
     </div>
   )
 }
