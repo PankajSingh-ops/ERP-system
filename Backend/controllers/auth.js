@@ -13,9 +13,9 @@ exports.postLogin=async(req,res,next)=>{
        const hashPassword=await bcrypt.compare(Password,userData.Password)
     //    console.log(hashPassword);
        if(hashPassword){
-        const token=await jwt.sign({userId:userData._id},"It is a secret key",{expiresIn:"1h",})
+        const token=await jwt.sign({userId:userData._id,role:userData.Role},"It is a secret key",{expiresIn:"1h",})
         // console.log(token);
-        res.status(200).json({token:token})
+        res.status(200).json({token:token,role:userData.Role})
        }
     }catch(err){
         console.log(err.message);

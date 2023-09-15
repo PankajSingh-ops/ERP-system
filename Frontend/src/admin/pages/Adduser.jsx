@@ -38,7 +38,7 @@ export default function Adduser() {
       body:JSON.stringify(Data),
       headers: {
         "Content-Type": "application/json",
-          Authorization: "Bearer " + ctx.token,
+        Authorization: "Bearer " + ctx.token,
         
       },
     })

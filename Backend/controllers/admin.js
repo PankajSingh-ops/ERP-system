@@ -2,7 +2,7 @@ const User=require('../models/users_model')
 const bcrypt=require("bcrypt")
 
 exports.postAddUser=async(req,res,next)=>{
-    console.log(req.body);
+    // console.log(req.body);
     const {Firstname,Lastname,Email,Phone,Age,
     Role,Password,CnfPassword}=req.body;
     if(Password===CnfPassword){
@@ -13,7 +13,7 @@ exports.postAddUser=async(req,res,next)=>{
         }
         else{try{
             const hashPassword=await bcrypt.hash(Password,12)
-            console.log(hashPassword);
+            // console.log(hashPassword);
             const response=await User.create({
                 Firstname,
                 Lastname,

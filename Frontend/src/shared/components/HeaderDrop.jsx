@@ -11,9 +11,15 @@ export default function HeaderDrop() {
       <h3><u>Main</u> </h3>
       <p onClick={()=>navigate("/")}>Dashboard</p>
       <p>Profile</p>
-      <h3><u>Admin Section</u></h3>
-      <p onClick={()=>navigate("/admin/add-user")}>Add User</p>
-      <p onClick={()=>navigate("/admin/teams")}>All Users</p>
+      {ctx.role=="Admin"&&(
+        <>
+        <h3><u>Admin Section</u></h3>
+        <p onClick={()=>navigate("/admin/add-user")}>Add User</p>
+        <p onClick={()=>navigate("/admin/teams")}>All Users</p>
+        </>
+      
+
+       )}
       <h3><u>Manager Section</u></h3>
       <p>Add Employee</p>
       <p>All Employees</p>

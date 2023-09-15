@@ -7,9 +7,11 @@ module.exports=async(req,res,next)=>{
       }
       if(req.headers?.authorization){
         let token=req.headers.authorization.split(" ")[1];
-        console.log(token);
+        console.log("token",token);
         try{
+          console.log("hello");
           const decodedToken=await jwt.verify(token,"It is a secret key");
+          console.log(decodedToken);
           const user=await User.findById(decodedToken.userId);
           console.log(user);
 
@@ -19,7 +21,8 @@ module.exports=async(req,res,next)=>{
           req.user=user;
           next()
         }catch(err){
-          return res.status(401).json({mesaage:"Invalid Token"})
+          console.log("fail");
+          return res.status(401).json({message:"Invalid Token"})
         }
       }else{
         res.status(401).json({message:"Invalid Token"})
