@@ -1,22 +1,38 @@
 const User=require('../models/users_model')
+const bcrypt=require("bcrypt")
 
 exports.postAddUser=async(req,res,next)=>{
-    // console.log(req.body);
-    try{
-    const response=await User.create({
-        Firstname:req.body.Firstname,
-        Lastname:req.body.Lastname,
-        Email:req.body.Email,
-        Phone:req.body.Phone,
-        Age:req.body.Age,
-        Role:req.body.Role,
-    })
-     if(response){
-        res.status(200).json({message:"Successfully added"})
-     }
-    }catch(err){
-        await res.status(400).json({message:err.message})
-    }
+    console.log(req.body);
+    const {Firstname,Lastname,Email,Phone,Age,
+    Role,Password,CnfPassword}=req.body;
+    if(Password===CnfPassword){
+        const userEmail=await User.findOne({Email:Email})
+        if(userEmail){
+            res.status(422).json({message:"Email Is is already present"})
+            console.log("Already presnet");
+        }
+        else{try{
+            const hashPassword=await bcrypt.hash(Password,12)
+            console.log(hashPassword);
+            const response=await User.create({
+                Firstname,
+                Lastname,
+                Email,
+                Phone,
+                Age,
+                Role,
+                Password:hashPassword,
+            })
+             if(response){
+                res.status(200).json({message:"Successfully added"})
+             }
+            }catch(err){
+                res.status(500).json({message:err.message})
+            }}
+    
+}else{
+  res.status(422).json({message:"Password is not matching"})
+}
 
 }
 exports.getUser=async(req,res,next)=>{

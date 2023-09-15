@@ -1,7 +1,8 @@
 const express=require("express")
 const {postAddUser, getUser, postDelete, postEdit, getEdit}=require("../controllers/admin")
 const router=express.Router();
-router.post("/add-user",postAddUser)
+const authJWT=require("../middleware/jwt")
+router.post("/add-user",authJWT,postAddUser)
 router.get("/teams",getUser)
 router.get("/delete/:id",postDelete)
 router.get("/update/:id",getEdit)

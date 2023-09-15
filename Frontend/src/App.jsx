@@ -6,7 +6,6 @@ import Teams from './admin/pages/Teams'
 import Profile from './user/Profile'
 import Edituser from './admin/pages/Edituser'
 import Signin from './auth/pages/Signin'
-import Signup from './auth/pages/Signup'
 import Authcontext from './context/Context'
 
 export default function App() {
@@ -21,10 +20,11 @@ export default function App() {
   }
   const token=useMemo(()=>{
   return localStorage.getItem("token")
-  },[])
+  },[isLoggedIn])
+  // console.log(token);
 
   return (
-    <Authcontext.Provider value={{token,isLoggedIn,
+    <Authcontext.Provider value={{token,isLoggedIn: !!token,
     loginHandler,logoutHandler}}>
    <BrowserRouter>
    <Routes>
@@ -38,7 +38,7 @@ export default function App() {
 
    {/* Auth routes  */}
    <Route path='/login' element={<Signin/>} />
-   <Route path='/signup' element={<Signup/>} />
+  
 
 
    </Routes>
