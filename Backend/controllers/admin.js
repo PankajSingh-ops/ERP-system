@@ -1,5 +1,6 @@
 const User=require('../models/users_model')
 const bcrypt=require("bcrypt")
+const Department=require("../models/department")
 
 exports.postAddUser=async(req,res,next)=>{
     // console.log(req.body);
@@ -106,5 +107,39 @@ exports.postEdit=async(req,res,next)=>{
 
     }catch(err){
         res.status(500).json({message:err.message})
+    }
+}
+exports.managerData=async(req,res,next)=>{
+    try{  const managerList=await User.find({Role:"Manager"})
+    res.status(200).json({data:managerList})
+
+}catch(err){
+ res.status(500).json({message:err.message})
+}
+  
+
+}
+exports.employeeData=async(req,res,next)=>{
+    try{  const employeeList=await User.find({Role:"Employee"})
+    res.status(200).json({data:employeeList})
+
+}catch(err){
+ res.status(500).json({message:err.message})
+}
+  
+
+}
+exports.postDepartment=async(req,res,next)=>{
+    const {department,manager,employee}=req.body;
+    console.log(department,manager,employee);
+    try{
+        const data=await new Department({department_name:department,manager:{managerId:manager},employee: employee.map((employeeId) => ({ employeId: employeeId._id })),})
+        const savedDepartment = await data.save();
+        res.status(200).json({message:"Department created"})
+        console.log("yes");
+
+    }catch(err){
+        res.status(500).json({message:err.message})
+        console.log(err.message);
     }
 }

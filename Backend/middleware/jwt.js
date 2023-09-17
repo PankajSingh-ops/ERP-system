@@ -7,13 +7,13 @@ module.exports=async(req,res,next)=>{
       }
       if(req.headers?.authorization){
         let token=req.headers.authorization.split(" ")[1];
-        console.log("token",token);
+        // console.log("token",token);
         try{
-          console.log("hello");
+          // console.log("hello");
           const decodedToken=await jwt.verify(token,"It is a secret key");
           console.log(decodedToken);
           const user=await User.findById(decodedToken.userId);
-          console.log(user);
+          // console.log(user);
 
           if(!user){
             return res.status(401).json({message:"User does not exist"})

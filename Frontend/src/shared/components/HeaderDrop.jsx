@@ -16,6 +16,7 @@ export default function HeaderDrop() {
         <h3><u>Admin Section</u></h3>
         <p onClick={()=>navigate("/admin/add-user")}>Add User</p>
         <p onClick={()=>navigate("/admin/teams")}>All Users</p>
+        <p onClick={()=>navigate("/admin/department")}>Add Department</p>
         </>
       
 

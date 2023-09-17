@@ -8,6 +8,7 @@ import Edituser from './admin/pages/Edituser'
 import Signin from './auth/pages/Signin'
 import Authcontext from './context/Context'
 import Protected from './util/Protected'
+import Department from './admin/pages/Department'
 
 export default function App() {
   const [isLoggedIn ,setIsLoggesIn]=useState(false)
@@ -30,10 +31,10 @@ export default function App() {
   const role=useMemo(()=>{
     return localStorage.getItem("role")
   },[isLoggedIn])
-  // console.log(token);
+  
 
   return (
-    <Authcontext.Provider value={{token,role,isLoggedIn: !!token,
+    <Authcontext.Provider value={{token,role,isLoggedIn,
     loginHandler,logoutHandler}}>
    <BrowserRouter>
    <Routes>
@@ -44,6 +45,7 @@ export default function App() {
    < Route path='/admin/teams' element={<Teams/>} />
    < Route path='/admin/update/:id' element={<Edituser/>} />
    <Route path='/profile' element={<Profile/>} />
+   <Route path='/admin/department' element={<Protected> <Department/> </Protected>} />
 
    {/* Auth routes  */}
    <Route path='/login' element={<Signin/>} />
