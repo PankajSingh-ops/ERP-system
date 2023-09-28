@@ -1,0 +1,26 @@
+.dropdown_main {
+  padding-top: 2rem;
+  width: 14.8%;
+  height: 100%;
+  background-color: rgb(31, 41, 55);
+  color: white;
+  line-height: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: rgb(214, 217, 226) 0px 3px 4px;
+}
+.dropdown_main ul {
+  height: 100%;
+  font-size: 20px;
+}
+.icons-menu {
+  width: 30%;
+  padding-left: 20px;
+
+  line-height: 50px;
+}
+.text-menu {
+  width: 70%;
+  line-height: 50px;
+}

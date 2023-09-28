@@ -1,21 +1,23 @@
-.main_table{
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-   
-
+.main_table {
+  width: 80%;
+  height: 100%;
+  padding: 1rem;
+  font-size: 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-table,th,td{
-    
-    height: auto;
-    line-height: 3rem;
-    border: 1px solid black;
-    text-align: center;
-    background-color: rgb(31,41,55);
-    color: white;
+table,
+th,
+td {
+  height: auto;
+  line-height: 3rem;
+  border: 1px solid black;
+  text-align: center;
+  /* background-color: rgb(31,41,55); */
+  /* color: white; */
 }
-table{
-    width: 62%;
+table {
+  width: 90%;
 }

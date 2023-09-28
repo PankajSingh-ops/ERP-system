@@ -1,11 +1,12 @@
-import Header from '../shared/components/Header'
-import styles from './Home.module.css'
+import Header from "../shared/components/Header/Header";
+import HeaderDrop from "../shared/components/Header/HeaderDrop";
+import styles from "./Home.module.css";
 
 export default function Home() {
   return (
     <>
-    <Header/>
-      
+      <Header />
+      <HeaderDrop />
     </>
-  )
+  );
 }

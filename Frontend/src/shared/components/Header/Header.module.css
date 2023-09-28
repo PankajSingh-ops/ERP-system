@@ -1,0 +1,45 @@
+/* header */
+.top-header {
+  height: 5rem;
+  width: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(106, 116, 187, 1) 0%,
+    rgba(14, 21, 31, 1) 100%
+  );
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.top-left-header {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  box-shadow: rgb(214, 217, 226) 0px 3px 4px;
+}
+.logo {
+  height: 100%;
+  width: 50%;
+}
+.logo img {
+  height: 100%;
+  width: 100%;
+}
+.top-right-header {
+  width: 15%;
+  font-size: 1.5rem;
+  margin: 1.2rem;
+  display: flex;
+  align-items: right;
+  justify-content: space-evenly;
+}
+.searchbar-div {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 1.5rem;
+  padding: 10px;
+}
+/* body */
