@@ -28,8 +28,9 @@ export default function Signin() {
     const incoming= await response.json()
     let token=incoming.token;
     let role=incoming.role;
+    let id=incoming.userId;
     // console.log(token,role);
-    ctx.loginHandler(token,role)
+    ctx.loginHandler(token,role,id)
     navigate("/")
 
     }else{

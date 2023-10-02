@@ -1,6 +1,8 @@
 const User=require('../models/users_model')
 const bcrypt=require("bcrypt")
 const Department=require("../models/department")
+const Attendence=require("../models/attendence")
+const Leave=require("../models/leaves")
 
 exports.postAddUser=async(req,res,next)=>{
     // console.log(req.body);
@@ -143,3 +145,58 @@ exports.postDepartment=async(req,res,next)=>{
         console.log(err.message);
     }
 }
+exports.getDepartments=async(req,res,next)=>{
+        const departmentData=await Department.find();
+        const id=departmentData[0].manager[0].managerId;
+        let emp=departmentData[0].employee.map(employee=>employee.employeId)
+        console.log(emp);
+        let newview=[];
+        const view=await User.findById(id)
+        console.log(emp.length);
+        for(let i=0;i<emp.length;i++){
+        let a=0
+        const dc=emp[a]
+        const data=await User.findById(dc)
+        a++;
+        console.log(data);
+
+        }
+        console.log(view);
+
+    }
+ exports.getCalender=async(req,res,next)=>{
+    const currentDate=req.body.date;
+    const newattendence=req.body.attendence;
+    const id=req.body.userId;
+    // console.log(currentDate,newattendence,id);
+   const databaseDate=await Attendence.findOne({date:currentDate})
+//    console.log(databaseDate);
+   if(!databaseDate){
+   try{
+    const checkDate=await Attendence.create({date:currentDate, attendence:newattendence,userId:id})
+    console.log(checkDate);
+    res.status(200).json({data:checkDate})
+
+   }catch(err){
+    res.status(500).json({message:err.message})
+   }
+
+}else{
+    // console.log("failded");
+    res.status(421).json({message:"You already perform this task"})
+}
+    
+ }
+ exports.postLeave=async(req,res,next)=>{
+    const {id,start,end,comment,approve}=req.body;
+    try{
+        const leaveFunction=await Leave.create({userId:id,fromDate:start,toDate:end,comment:comment,approve:approve})
+        res.status(200).json({message:"Send for the leave"})
+
+    }catch(err){
+        res.status(500).json({message:err.message})
+    }
+    
+
+
+ }

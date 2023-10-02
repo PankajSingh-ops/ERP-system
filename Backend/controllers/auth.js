@@ -15,7 +15,7 @@ exports.postLogin=async(req,res,next)=>{
        if(hashPassword){
         const token=await jwt.sign({userId:userData._id,role:userData.Role},"It is a secret key",{expiresIn:"1h",})
         // console.log(token);
-        res.status(200).json({token:token,role:userData.Role})
+        res.status(200).json({token:token,userId:userData._id,role:userData.Role})
        }
     }catch(err){
         console.log(err.message);

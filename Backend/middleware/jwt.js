@@ -1,7 +1,7 @@
 const jwt=require('jsonwebtoken')
 const User=require("../models/users_model")
 module.exports=async(req,res,next)=>{
-    console.log("abc");
+    // console.log("abc");
     if(req.method==="OPTIONS"){
         return next();
       }

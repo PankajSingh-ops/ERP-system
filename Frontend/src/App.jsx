@@ -9,20 +9,24 @@ import Signin from './auth/pages/Signin'
 import Authcontext from './context/Context'
 import Protected from './util/Protected'
 import Department from './admin/pages/Department'
+import Calender from './user/Calender'
+import Leaves from './user/Leaves'
 
 export default function App() {
   const [isLoggedIn ,setIsLoggesIn]=useState(false)
   useEffect(()=>{
 
   },[])
-  const loginHandler=(token,role)=>{
+  const loginHandler=(token,role,id)=>{
   localStorage.setItem("token",token) 
   localStorage.setItem("role",role)
+  localStorage.setItem("id",id)
   setIsLoggesIn(true)
   }
   const logoutHandler=()=>{
     localStorage.removeItem("token");
     localStorage.removeItem("role")
+    localStorage.removeItem("id")
     setIsLoggesIn(false)
   }
   const token=useMemo(()=>{
@@ -31,14 +35,19 @@ export default function App() {
   const role=useMemo(()=>{
     return localStorage.getItem("role")
   },[isLoggedIn])
+  const id=useMemo(()=>{
+    return localStorage.getItem("id")
+  },[isLoggedIn])
   
 
   return (
-    <Authcontext.Provider value={{token,role,isLoggedIn,
+    <Authcontext.Provider value={{token,role,isLoggedIn,id,
     loginHandler,logoutHandler}}>
    <BrowserRouter>
    <Routes>
    <Route path='/' element={<Home/>} />
+   <Route path='/calender' element={<Calender/>}/>
+   <Route path='/leave' element={<Leaves/>} />
 
    {/* Admin router  */}
    < Route path='/admin/add-user' element={<Protected> <Adduser/> </Protected> } />
