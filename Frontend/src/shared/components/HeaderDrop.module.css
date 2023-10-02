@@ -1,7 +1,7 @@
 .dropdown_main{
     padding-top: 2rem;
     width: 18%;
-    height: 100%;
+    height: auto;
     background-color: rgb(31,41,55);
     color: white;
     display: flex;
@@ -10,6 +10,7 @@
     line-height: 2rem;
     position: absolute;
     border: 1px solid white;
+    margin-bottom: 2rem;
 }
 .dropdown_main p:hover{
 border-bottom: 1px solid white;

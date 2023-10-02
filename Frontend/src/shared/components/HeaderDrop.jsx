@@ -33,8 +33,11 @@ export default function HeaderDrop() {
       <p>Calender</p>
       <p onClick={()=>navigate("/leave")}>Leaves</p>
       <p>Activities</p>
-      {ctx.isLoggedIn&&(
-      <p onClick={ctx.logoutHandler}>Logout</p>)
+
+      {ctx.isLoggedIn?(
+      <p onClick={ctx.logoutHandler}>Logout</p>):(
+        <p onClick={()=>navigate('/login')}>Login</p>
+      )
       }
     </div>
   )

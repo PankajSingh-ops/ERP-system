@@ -41,7 +41,7 @@ export default function App() {
   
 
   return (
-    <Authcontext.Provider value={{token,role,isLoggedIn,id,
+    <Authcontext.Provider value={{token,role,isLoggedIn:!!token,id,
     loginHandler,logoutHandler}}>
    <BrowserRouter>
    <Routes>
