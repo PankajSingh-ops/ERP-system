@@ -1,0 +1,15 @@
+.leave_table{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+table{
+    width: 60%;
+    height: auto;
+    background-color: aliceblue;
+}
+/* th{
+    width: 200px;
+} */

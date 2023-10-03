@@ -133,10 +133,24 @@ exports.employeeData=async(req,res,next)=>{
 }
 exports.postDepartment=async(req,res,next)=>{
     const {department,manager,employee}=req.body;
-    console.log(department,manager,employee);
+    console.log(manager);
     try{
-        const data=await new Department({department_name:department,manager:{managerId:manager},employee: employee.map((employeeId) => ({ employeId: employeeId._id })),})
+        const userData=await User.find({managerId:manager,department:department})
+        if(userData.length>0){
+            res.status(500).json({message:"Already present"})
+        }
+        else{
+            const data=await new Department({department_name:department,manager:{managerId:manager},employee: employee.map((employeeId) => ({ employeId: employeeId._id })),})
         const savedDepartment = await data.save();
+        const employeeSave=await User.findByIdAndUpdate(manager,{department:department,employees: employee.map((employeeId) => ({ employeeId: employeeId._id }))})
+        for(let i=0;i<employee.length;i++){
+            const managerSave=await User.findByIdAndUpdate({_id:employee[i]._id },{department:department,managerId:manager})
+        }
+        }
+        
+        
+
+        
         res.status(200).json({message:"Department created"})
         console.log("yes");
 
@@ -169,12 +183,12 @@ exports.getDepartments=async(req,res,next)=>{
     const newattendence=req.body.attendence;
     const id=req.body.userId;
     // console.log(currentDate,newattendence,id);
-   const databaseDate=await Attendence.findOne({date:currentDate})
+   const databaseDate=await Attendence.findOne({date:currentDate,userId:id})
 //    console.log(databaseDate);
    if(!databaseDate){
    try{
     const checkDate=await Attendence.create({date:currentDate, attendence:newattendence,userId:id})
-    console.log(checkDate);
+    // console.log(checkDate);
     res.status(200).json({data:checkDate})
 
    }catch(err){
@@ -189,14 +203,57 @@ exports.getDepartments=async(req,res,next)=>{
  }
  exports.postLeave=async(req,res,next)=>{
     const {id,start,end,comment,approve}=req.body;
+    if(id){
     try{
+        const findUser=await User.findById(id)
+        const managerId=findUser.managerId;
+        console.log(managerId);
         const leaveFunction=await Leave.create({userId:id,fromDate:start,toDate:end,comment:comment,approve:approve})
+        const newId=leaveFunction._id;
+        console.log(id);
+       
+        if(leaveFunction){
+        const leaveManager=await User.findByIdAndUpdate({_id:managerId},{leaves:{leaveId:newId}})
+        console.log(leaveManager);
+        }
         res.status(200).json({message:"Send for the leave"})
 
     }catch(err){
         res.status(500).json({message:err.message})
     }
+}
     
 
 
  }
+ exports.getLeave=async(req,res,next)=>{
+    // const {id}=req.params
+    // console.log(id);
+    // const newData=await User.findById(id);
+    
+    try{
+    // for(let i=0;i<newData.)
+    const leaveData=await Leave.find();
+    console.log(leaveData);
+    res.status(200).json({data:leaveData})
+
+    }catch(err){
+        res.status(500).json({message:err.message})
+    }
+}
+ 
+ exports.deleteLeave=async(req,res,next)=>{
+    const {id}=req.params;
+    // console.log(id);
+    try{
+    const data=await Leave.deleteOne({userId:id})
+    if(data){
+        res.status(200).json({message:"Application Rejected"})
+    }
+    
+    }catch(err){
+        console.log("nothing");
+        res.status(500).json({message:err.message})
+    }
+ }
+ 

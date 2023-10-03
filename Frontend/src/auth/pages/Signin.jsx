@@ -1,5 +1,5 @@
 import { useContext, useRef } from 'react'
-import Header from '../../shared/components/Header'
+import Styles from './Signin.module.css'
 import { useNavigate } from 'react-router-dom';
 import Authcontext from '../../context/Context';
 
@@ -40,14 +40,16 @@ export default function Signin() {
   }
   return (
     <>
-    <Header/>
-    <form onSubmit={loginSubmit}>
-      <p>Enter email</p>
+   <div className={Styles.main_signin}>
+   <form onSubmit={loginSubmit}>
+      <h2>Enter email</h2>
       <input type="email" name="Email" ref={useEmail}/>
-      <p>Enter password</p>
+      <h2>Enter password</h2>
       <input type="text" name="Password" ref={usePassword} />
       <button>Sign In</button>
     </form>
+   </div>
+   
       </>
   
   )

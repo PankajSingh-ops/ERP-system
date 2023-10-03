@@ -3,10 +3,12 @@ import styles from './Teams.module.css'
 import Header from '../../shared/components/Header'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import SyncLoader from "react-spinners/SyncLoader";
 
 
 
 export default function Teams() {
+    const [loading,setLoading]=useState(true)
     const [products,setTeam]=useState([])
     const [qwerty, setQwert]=useState("")
     const navigate=useNavigate()
@@ -18,6 +20,7 @@ export default function Teams() {
             }
             const responseText=await response.json()
             // console.log(responseText.data);
+            setLoading(false)
             setTeam(responseText.data);
 
             
@@ -64,9 +67,23 @@ export default function Teams() {
     const editFunction=async(id)=>{
       navigate(`/admin/update/${id}`)
     }
+  
+    
   return (
     <>
-    <Header/>
+      <Header/>
+    {loading?(<div className={styles.loading_bar}>
+      <SyncLoader
+        color={"#36d7b7"}
+        loading={loading}
+        size={20}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+        />
+    </div> 
+      ):(
+      <>
+  
     <div className={styles.main_table}>
     <table>
       <tr>
@@ -100,6 +117,9 @@ export default function Teams() {
       
     </table>
     </div>
+    </>
+    )
+}
     </>
   )
 }

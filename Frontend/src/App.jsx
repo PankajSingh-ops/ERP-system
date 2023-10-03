@@ -11,12 +11,13 @@ import Protected from './util/Protected'
 import Department from './admin/pages/Department'
 import Calender from './user/Calender'
 import Leaves from './user/Leaves'
+import Leaveapplication from './manager/Leaveapplication'
 
 export default function App() {
   const [isLoggedIn ,setIsLoggesIn]=useState(false)
   useEffect(()=>{
 
-  },[])
+  },[isLoggedIn])
   const loginHandler=(token,role,id)=>{
   localStorage.setItem("token",token) 
   localStorage.setItem("role",role)
@@ -45,15 +46,16 @@ export default function App() {
     loginHandler,logoutHandler}}>
    <BrowserRouter>
    <Routes>
-   <Route path='/' element={<Home/>} />
-   <Route path='/calender' element={<Calender/>}/>
-   <Route path='/leave' element={<Leaves/>} />
+   <Route path='/' element={<Protected><Home/></Protected>} />
+   <Route path='/calender' element={<Protected><Calender/></Protected>}/>
+   <Route path='/leave' element={<Protected><Leaves/></Protected>} />
+   <Route path='/leave-application' element={<Protected><Leaveapplication/></Protected>} />
 
    {/* Admin router  */}
    < Route path='/admin/add-user' element={<Protected> <Adduser/> </Protected> } />
-   < Route path='/admin/teams' element={<Teams/>} />
-   < Route path='/admin/update/:id' element={<Edituser/>} />
-   <Route path='/profile' element={<Profile/>} />
+   < Route path='/admin/teams' element={<Protected><Teams/></Protected>} />
+   < Route path='/admin/update/:id' element={<Protected><Edituser/></Protected>} />
+   <Route path='/profile' element={<Protected><Profile/></Protected>} />
    <Route path='/admin/department' element={<Protected> <Department/> </Protected>} />
 
    {/* Auth routes  */}

@@ -69,11 +69,11 @@ const handleCheckboxChange = (employee) => {
      <h2>Department</h2>
      <input type="text" name="Department" ref={useDepartmnet} />
      <h2>Manager</h2>
-     <select name="manager" id="">
+     <select name="manager" id="" ref={useManager}>
 
         {isManager.map((p)=>{
             return <>
-            <option value={p._id} ref={useManager}>{p.Firstname}</option>
+            <option value={p._id} >{p.Firstname}</option>
             </> 
         })}
      </select>

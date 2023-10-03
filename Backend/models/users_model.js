@@ -29,7 +29,27 @@ const userSchema=new mongoose.Schema({
    Password:{
       type:String,
       required:true,
-   }
+   },
+   department:{
+      type:String,
+   },
+   employees:[
+      {
+         employeeId:{
+            type:mongoose.Schema.ObjectId
+         }
+      }
+   ],
+   managerId:{
+      type:mongoose.Schema.ObjectId
+   },
+   leaves:[
+      {
+        leaveId:{ 
+       type:mongoose.Schema.ObjectId  
+        }
+      }
+   ]
 
 })
 module.exports=new mongoose.model("User",userSchema)
