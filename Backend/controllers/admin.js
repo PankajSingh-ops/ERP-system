@@ -207,14 +207,14 @@ exports.getDepartments=async(req,res,next)=>{
     try{
         const findUser=await User.findById(id)
         const managerId=findUser.managerId;
-        console.log(managerId);
-        const leaveFunction=await Leave.create({userId:id,fromDate:start,toDate:end,comment:comment,approve:approve})
+        const userName=findUser.Firstname;
+        const leaveFunction=await Leave.create({userId:id,managerId:managerId,Name:userName,fromDate:start,toDate:end,comment:comment,approve:approve})
         const newId=leaveFunction._id;
-        console.log(id);
+        // console.log(id);
        
         if(leaveFunction){
-        const leaveManager=await User.findByIdAndUpdate({_id:managerId},{leaves:{leaveId:newId}})
-        console.log(leaveManager);
+        const leaveManager=await User.findByIdAndUpdate({_id:managerId},{$push:{leaves:{leaveId:newId,name:userName}}})
+        // console.log(leaveManager);
         }
         res.status(200).json({message:"Send for the leave"})
 
@@ -227,14 +227,13 @@ exports.getDepartments=async(req,res,next)=>{
 
  }
  exports.getLeave=async(req,res,next)=>{
-    // const {id}=req.params
+    const {id}=req.params
     // console.log(id);
-    // const newData=await User.findById(id);
     
     try{
     // for(let i=0;i<newData.)
-    const leaveData=await Leave.find();
-    console.log(leaveData);
+    const leaveData=await Leave.find({managerId:id});
+    // console.log(leaveData);
     res.status(200).json({data:leaveData})
 
     }catch(err){

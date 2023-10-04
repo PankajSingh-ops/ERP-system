@@ -16,3 +16,13 @@ exports.approveLeave=async(req,res,next)=>{
     }
    
 }
+exports.leaveStatus=async(req,res,next)=>{
+    const{id}=req.params;
+    try{
+        const userData=await Leave.find({userId:id})
+        res.status(200).json({data:userData})
+
+    }catch(err){
+        res.status(500).json({message:err.message})
+    }
+}

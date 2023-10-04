@@ -2,9 +2,11 @@ import React from 'react'
 import styles from './Header.module.css'
 import Searchheader from './Searchheader'
 import HeaderDrop from './HeaderDrop'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Header() {
+  const nav=useNavigate()
   return (
     <>
     <div className={styles.main_header}>
@@ -22,7 +24,7 @@ export default function Header() {
       <div className={`${styles.dashboard_header} ${styles.hover_header}`}>Dashboard</div>
       <div className={`${styles.team_header} ${styles.hover_header}`}>Team</div>
       <div className={` ${styles.projects_header} ${styles.hover_header}`}>Projects</div>
-      <div className={` ${styles.calender_header} ${styles.hover_header}`}>Calender</div>
+      <div className={` ${styles.calender_header} ${styles.hover_header}`} onClick={()=>nav('/calendar')}>Calender</div>
      </div>
      <div className={styles.gap}></div>
      <div className={styles.search_div}>

@@ -3,6 +3,14 @@ const leaveData=new mongoose.Schema({
     userId:{
         type: mongoose.Schema.Types.ObjectId,
     },
+    managerId:{
+        type: mongoose.Schema.Types.ObjectId,
+    },
+    Name:{
+        type:String,
+        required:true,
+
+    },
     fromDate:{
         type:String,
         required:true,

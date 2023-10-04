@@ -42,8 +42,9 @@ export default function Leaveapplication() {
     <>
     <Header/>
     <div className={Styles.leave_table}>
-      <table>
+      <table className={Styles.table}>
         <tr><th>Name</th>
+        <th>User ID</th>
         <th>From</th>
         <th>To</th>
         <th>Reason</th>
@@ -51,6 +52,7 @@ export default function Leaveapplication() {
         <th>Denie Leave</th></tr>
         {tableData.map((p)=>{
           return <tr key={p._id}>
+          <td>{p.Name}</td>
           <td>{p.userId}</td>
           <td>{p.fromDate}</td>
           <td>{p.toDate}</td>
@@ -63,8 +65,8 @@ export default function Leaveapplication() {
             
           ):(
             <>
-            <td onClick={()=>{approveApplication(p.userId)}}>Approve</td>
-          <td onClick={()=>{deleteApplication(p.userId)}}>Reject</td>
+            <td onClick={()=>{approveApplication(p.userId)}}><h4>Approve</h4> </td>
+          <td onClick={()=>{deleteApplication(p.userId)}}><h4>Reject</h4></td>
             </>
           
           )

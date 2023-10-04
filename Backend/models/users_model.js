@@ -47,6 +47,9 @@ const userSchema=new mongoose.Schema({
       {
         leaveId:{ 
        type:mongoose.Schema.ObjectId  
+        },
+        name:{
+         type:String
         }
       }
    ]

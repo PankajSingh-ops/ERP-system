@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import Header from '../shared/components/Header'
 import Authcontext from '../context/Context';
+import Styles from './Leaves.module.css'
 
 export default function Leaves() {
     const useStart=useRef();
@@ -8,6 +9,8 @@ export default function Leaves() {
     const useComment=useRef();
     const ctx=useContext(Authcontext)
     const [min,setminDate]=useState("")
+    const [leaveData,setLeaveData]=useState([])
+    const [refresh,setRefresh]=useState("")
     useEffect(()=>{
         const minDate = () => {
             const currentDate = new Date();
@@ -18,9 +21,19 @@ export default function Leaves() {
             const formattedDate = `${year}-${month}-${day}`;
             setminDate(formattedDate);
         }
+        const leaveStatus=async(id)=>{
+        const status=await fetch(`http://localhost:4000/api/leave-status/${id}`)
+        if(!status.ok){
+          console.log("No leaves");
+        }
+        const leaveResponnse=await status.json();
+        setLeaveData(leaveResponnse.data)
+
+        }
+        leaveStatus(ctx.id);
        
         minDate();
-    },[min])
+    },[min,leaveData])
     const leaveSubmit=async(event)=>{
          event.preventDefault();
          const data={
@@ -37,6 +50,10 @@ export default function Leaves() {
             },
             body:JSON.stringify(data)
          })
+         if(!response.ok){
+          console.log("there is an error in fetching leave data");
+         }
+         setRefresh("Hogya")
 
     }
   return (
@@ -49,6 +66,26 @@ export default function Leaves() {
         <input type="text-area" name="Reason" ref={useComment}/>
         <button>Apply</button>
      </form>
+     <table className={Styles.leavetable}>
+      <tr>
+        <th>Name</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Reason</th>
+        <th>Leave Status</th>
+      </tr>
+      {leaveData.map((p)=>{
+        return <tr key={p._id}>
+          <td>{p.Name}</td>
+          <td>{p.fromDate}</td>
+          <td>{p.toDate}</td>
+          <td>{p.comment}</td>
+          {p.approve=="Yes"?(<td>Approve</td>):(<td>Pending</td>)}
+        </tr>
+      })
+
+      }
+     </table>
     </>
   )
 }

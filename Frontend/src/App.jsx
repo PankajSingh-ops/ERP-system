@@ -12,12 +12,14 @@ import Department from './admin/pages/Department'
 import Calender from './user/Calender'
 import Leaves from './user/Leaves'
 import Leaveapplication from './manager/Leaveapplication'
+import CalenderDate from './shared/components/CalenderDate'
 
 export default function App() {
   const [isLoggedIn ,setIsLoggesIn]=useState(false)
+  const [refresh,setRefresh]=useState("")
   useEffect(()=>{
 
-  },[isLoggedIn])
+  },[isLoggedIn,refresh])
   const loginHandler=(token,role,id)=>{
   localStorage.setItem("token",token) 
   localStorage.setItem("role",role)
@@ -29,6 +31,7 @@ export default function App() {
     localStorage.removeItem("role")
     localStorage.removeItem("id")
     setIsLoggesIn(false)
+    setRefresh("refresh")
   }
   const token=useMemo(()=>{
   return localStorage.getItem("token")
@@ -47,9 +50,10 @@ export default function App() {
    <BrowserRouter>
    <Routes>
    <Route path='/' element={<Protected><Home/></Protected>} />
-   <Route path='/calender' element={<Protected><Calender/></Protected>}/>
+   <Route path='/attendence' element={<Protected><Calender/></Protected>}/>
    <Route path='/leave' element={<Protected><Leaves/></Protected>} />
    <Route path='/leave-application' element={<Protected><Leaveapplication/></Protected>} />
+   <Route path='/calendar' element={<CalenderDate/>} />
 
    {/* Admin router  */}
    < Route path='/admin/add-user' element={<Protected> <Adduser/> </Protected> } />
