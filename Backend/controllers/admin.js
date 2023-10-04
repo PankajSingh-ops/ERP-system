@@ -3,6 +3,7 @@ const bcrypt=require("bcrypt")
 const Department=require("../models/department")
 const Attendence=require("../models/attendence")
 const Leave=require("../models/leaves")
+const department = require('../models/department')
 
 exports.postAddUser=async(req,res,next)=>{
     // console.log(req.body);
@@ -112,7 +113,7 @@ exports.postEdit=async(req,res,next)=>{
     }
 }
 exports.managerData=async(req,res,next)=>{
-    try{  const managerList=await User.find({Role:"Manager"})
+    try{  const managerList=await User.find({Role:"Manager",employees:[]})
     res.status(200).json({data:managerList})
 
 }catch(err){
@@ -123,7 +124,9 @@ exports.managerData=async(req,res,next)=>{
 }
 exports.employeeData=async(req,res,next)=>{
     try{  const employeeList=await User.find({Role:"Employee"})
-    res.status(200).json({data:employeeList})
+    const newList=employeeList.filter((p)=>!p.managerId)
+    // console.log(newList);
+    res.status(200).json({data:newList})
 
 }catch(err){
  res.status(500).json({message:err.message})

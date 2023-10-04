@@ -101,3 +101,17 @@ body{
 cursor: pointer;
 transform: scale(1.2);
 }
+.notification_dropdown{
+    margin-left: 15rem;
+    width: 250px;
+    height: 300px;
+    border: 1px solid white;
+    padding:2rem ;
+    background-color: white;
+    position: absolute;
+    left: 48rem;
+    display: none;
+}
+.vis_dropdown{
+    display: block !important;
+}

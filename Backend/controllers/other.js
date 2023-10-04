@@ -26,3 +26,16 @@ exports.leaveStatus=async(req,res,next)=>{
         res.status(500).json({message:err.message})
     }
 }
+
+exports.getNotification=async(req,res,next)=>{
+    const {id}=req.params;
+    try{
+        const leaveNotification=await Leave.find({managerId:id,approve:"No"})
+        if(leaveNotification.length>0){
+            res.status(200).json({data:leaveNotification})
+        }
+
+    }catch(err){
+        res.status(500).json({message:err.message})
+    }
+}
